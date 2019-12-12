@@ -1,70 +1,54 @@
 /*
  * Dieses Programm liest die Temperatur und Luftfeuchtigkeit mit dem DHT22
  * aus und gibt diese an einem OLED aus.
+ * 
+ * Johannes Werner
+ * 
+ * 12/12/2019
  */
 
 
-#include "DHT.h"
-#define DHTPIN 23
-#define DHTTYPE DHT22
+#include "DHT.h"      // Einbinden der Arduino DHT Bibliothek
+#define DHTPIN 23       // Pin auf dem der DHT verbunden ist (GPIO 23)
+#define DHTTYPE DHT22       // DHT Typ
 DHT dht(DHTPIN, DHTTYPE);
 
+//Libraries für das OLED Display
 #include <Arduino.h>
-#include <U8g2lib.h>
-
-#ifdef U8X8_HAVE_HW_SPI
-#include <SPI.h>
-#endif
-#ifdef U8X8_HAVE_HW_I2C
+#include <U8g2lib.h> //Textanzeige
 #include <Wire.h>
-#endif
 
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);
 
 void setup(void) {
+  // Setup des Displays
   Serial.begin(9600);
-  
   u8g2.begin();
   dht.begin();
 }
 
 void loop() {
-  delay(3000); // 3 s warten zwischen Messungen, der Sensor kann max. 0,5Hz
-  float h = dht.readHumidity();
-  // Read temperature as Celsius (the default)
-  float t = dht.readTemperature();
-
-  // Check if any reads failed and exit early (to try again).
-  if (isnan(h) || isnan(t) || isnan(f)) {
-    Serial.println(F("Failed to read from DHT sensor!"));
-    return;
-  }
-
-  // Compute heat index in Fahrenheit (the default)
-  float hif = dht.computeHeatIndex(f, h);
-  // Compute heat index in Celsius (isFahreheit = false)
-  float hic = dht.computeHeatIndex(t, h, false);
-
-  Serial.print(F("Humidity: "));
-  Serial.print(h);
-  Serial.print(F("%  Temperature: "));
-  Serial.print(t);
-  Serial.print(F("°C "));
-  Serial.print(f);
-  Serial.print(F("°F  Heat index: "));
-  Serial.print(hic);
-  Serial.print(F("°C "));
-  Serial.print(hif);
-  Serial.println(F("°F"));
-
+  delay(2000);        // Sensor kann maximal 0.5Hz. Abfrage alle 3s.
+  float h = dht.readHumidity();       //Luftfeuchtigkeit speichern in h
+  float t = dht.readTemperature();         //Temperatur speichern in t
+  Serial.print(t);        //Ausgabe in der Serial, zum Auslesen am PC
+  
   u8g2.clearBuffer();         // clear the internal memory
-  u8g2.setFont(u8g2_font_courB10_tf); // choose a suitable font
-  //u8g2.drawStr(0,10,"Hello World!");  // write something to the internal memory
-  u8g2.drawStr(0,20,"Temperature");
-  u8g2.setFont(u8g2_font_courB24_tf);
-  u8g2.setCursor(0,50); //für .print braucht man setCursor
-  u8g2.drawStr(100,50,"°C");
+  
+  u8g2.setFont(u8g2_font_5x7_tf); // 6p
+  u8g2.drawStr(0,6,"Temperature:");
+  u8g2.drawStr(0,40,"Humidity:");
+  
+  u8g2.setFont(u8g2_font_crox5hb_tf);   // (16p)
+  u8g2.setCursor(20,28); //für .print braucht man setCursor
   u8g2.print(t);
+  u8g2.setCursor(20,64);
+  u8g2.print(h);
+
+  u8g2.setFont(u8g2_font_unifont_t_symbols);
+  u8g2.drawGlyph(90,26,0x2103);
+  u8g2.drawGlyph(90,62,0xFF05);
+  
   u8g2.sendBuffer();          // transfer internal memory to the display
   delay(1000); 
 }
