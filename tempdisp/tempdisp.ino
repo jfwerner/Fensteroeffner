@@ -24,8 +24,8 @@ DHT dht(DHTPIN, DHTTYPE);
 #include <WiFiClientSecure.h>
 #include <UniversalTelegramBot.h>
 
-char ssid[] = "WLAN-JPDXXU";     // SSID
-char password[] = "5465639467259766"; // Netzwerkschlüssel
+char ssid[] = "k3rn3l-p4n1c";     // SSIDhatching boneless machinist brownnose
+char password[] = "merrill naval statute dayton"; // Netzwerkschlüssel
 
 #define BOTtoken "821667466:AAFtCtzbe_x4TMjj5ewGQB6EfqG3eppk3H8" 
 
@@ -87,15 +87,15 @@ void handleNewMessages(int numNewMessages) {
       bot.sendChatAction(chat_id, "measuring");
       float t = dht.readTemperature();
       float h = dht.readHumidity();
-      t = t-1;
-      h = h-2;
+      t = (t-1);
+      h = (h-2);
       String welcome = "The current temperature is " + String(t) + "°C,  " + String(273.15 + t) + "K  or " + String(t*1.8 + 32) + "°F.\n" ;
       welcome += "The current measured humidity is " + String(h) + "%.";
       bot.sendMessage(chat_id, welcome);
     }
     //----------- Hilfe -------------
     if (text == "/help") {
-      bot.sendChatAction(chat_id, "figuring this out");
+      bot.sendChatAction(chat_id, "typing");
       
       String help = "Hi! This bot is connected to a smart window! Don't worry, not Windows 10, so it won't break overnight or crash at random moments ;).";
       help += "\n\nYou can use the following commands:\n";
@@ -106,6 +106,7 @@ void handleNewMessages(int numNewMessages) {
     }
     //--------- Fensterstatus ---------
     if (text == "/status") {
+      bot.sendChatAction(chat_id, "find_location");
       bool windowopen = false;
       if (windowopen = true) {
       String stat = "The window is open.";                //dafür bool funktion bauen
@@ -121,7 +122,12 @@ void handleNewMessages(int numNewMessages) {
       bot.sendChatAction(chat_id, "wut???");
       bot.sendMessage(chat_id, String("Sorry m8, dunno what the fuck you sayin. Send me /help for help"));
     }
-    
+
+   //------------ Open --------------------
+   if (text == "/open") {
+    bot.sendChatAction(chat_id, "typing");
+    myStepper.step(10240);
+   }
   }
 }
 
