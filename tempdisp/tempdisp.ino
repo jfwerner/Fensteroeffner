@@ -6,7 +6,7 @@
  *  
  *  Nutzen der Werte zur Steuerung eines 28BY ... Schrittmotors mit einem xxxxx Motortreibers um ein Fenster zu öffnen und zu schließen.
  *  
- *  Changelog auf github.com
+ *  Changelog auf https://github.com/jojo313/Fensterheber
  */
 
 //--------------------------------------// Setup der dependencies und Initialisierung //--------------------------------------------------
@@ -24,8 +24,8 @@ DHT dht(DHTPIN, DHTTYPE);
 #include <WiFiClientSecure.h>
 #include <UniversalTelegramBot.h>
 
-char ssid[] = "k3rn3l-p4n1c";     // SSIDhatching boneless machinist brownnose
-char password[] = "merrill naval statute dayton"; // Netzwerkschlüssel
+char ssid[] = "[SSID]";     // SSID
+char password[] = "[WPA-2 Key]"; // Netzwerkschlüssel
 
 #define BOTtoken "821667466:AAFtCtzbe_x4TMjj5ewGQB6EfqG3eppk3H8" 
 
