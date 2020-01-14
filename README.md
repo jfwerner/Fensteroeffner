@@ -3,6 +3,7 @@
 ## Zweck:
 Auslesen der Temperatur und Luftfeuchtigkeit mithilfe des DHT22. Anzeige in human readable format in °C und %.
 Nutzen der Werte und eines Telegram bots zur Steuerung eines 28BY Schrittmotors mit einem ULN2003 Motortreibers um ein Fenster zu öffnen und zu schließen.
+![Schaltplan](https://i.imgur.com/qYhl0lE.png)
 
 Mechatronik Projekt bei der HsKa bei Herrn Jürgen Walther.
 
