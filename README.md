@@ -7,6 +7,9 @@ Nutzen der Werte und eines Telegram bots zur Steuerung eines 28BY Schrittmotors 
 
 Mechatronik Projekt bei der HsKa bei Herrn Jürgen Walther.
 
+## Wo kann ich das Programm herunterladen?
+Bei den [Releases](https://github.com/jojo313/Fensteroeffner/releases) gibt es alle Versionen des Programms. Dort einfach die "tempdisp.ino" anklicken, und in der Arduino IDE öffnen.
+
 ## [Wiki](https://github.com/jojo313/Fensteroeffner/wiki)
 mit genaueren Erklärungen, Beispielen und Screenshots
 
