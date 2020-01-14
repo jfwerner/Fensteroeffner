@@ -12,6 +12,10 @@ Bei den [Releases](https://github.com/jojo313/Fensteroeffner/releases) gibt es a
 
 ## [Wiki](https://github.com/jojo313/Fensteroeffner/wiki)
 mit genaueren Erklärungen, Beispielen und Screenshots
+### [Beschreibung und Vorteile/Nachteil von Telegram](https://github.com/jojo313/Fensteroeffner/wiki/Features---Beschreibung-des-Projektes)
+### [Komponenten und Breadboard](https://github.com/jojo313/Fensteroeffner/wiki/Komponenten-und-Breadboard)
+Mit Erklärungen zur Verkabelung
+
 
 ## Features, Implementierung
 - [x] Steuerung mit Telegram
@@ -23,6 +27,7 @@ mit genaueren Erklärungen, Beispielen und Screenshots
 - [ ] Löten der Komponenten für ein schöneres und kompakteres Produkt
 - [ ] Bessere Fixierung für den Motor
 - [ ] Access Restriction bei Telegram
+
 
 
 This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.
