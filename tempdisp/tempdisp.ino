@@ -7,7 +7,7 @@
  *  Nutzen der Werte und eines Telegram bots zur Steuerung eines 28BY Schrittmotors mit einem ULN2003 Motortreibers 
  *  um ein Fenster zu öffnen und zu schließen.
  *  
- *  Changelog auf https://github.com/jojo313/Fensterheber
+ *  Changelog auf https://github.com/jfwerner/Fensteroeffner
  *  
  *  Creative Commons License:
  *  
