@@ -4,9 +4,15 @@
  *  
  *  Zweck: Auslesen der Temperatur und Luftfeuchtigkeit mithilfe des DHT22. Anzeige in human readable format in °C und %.
  *  
- *  Nutzen der Werte zur Steuerung eines 28BY ... Schrittmotors mit einem xxxxx Motortreibers um ein Fenster zu öffnen und zu schließen.
+ *  Nutzen der Werte und eines Telegram bots zur Steuerung eines 28BY Schrittmotors mit einem ULN2003 Motortreibers 
+ *  um ein Fenster zu öffnen und zu schließen.
  *  
  *  Changelog auf https://github.com/jojo313/Fensterheber
+ *  
+ *  Creative Commons License:
+ *  
+ *  Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
+ *  https://creativecommons.org/licenses/by-nc/4.0/legalcode
  */
 
 //--------------------------------------// Setup der dependencies und Initialisierung //--------------------------------------------------
@@ -27,7 +33,7 @@ DHT dht(DHTPIN, DHTTYPE);
 char ssid[] = "[SSID]";     // SSID
 char password[] = "[WPA-2 Key]"; // Netzwerkschlüssel
 
-#define BOTtoken "821667466:AAFtCtzbe_x4TMjj5ewGQB6EfqG3eppk3H8" 
+#define BOTtoken "[API Token]" 
 
 WiFiClientSecure client; // Initialisierung
 UniversalTelegramBot bot(BOTtoken, client);
@@ -84,7 +90,7 @@ void handleNewMessages(int numNewMessages) {
     if (from_name == "") from_name = "Guest";
     //------------ Datenabfrage --------------
     if (text == "/data") {
-      bot.sendChatAction(chat_id, "measuring");
+      bot.sendChatAction(chat_id, "typing");
       float t = dht.readTemperature();
       float h = dht.readHumidity();
       t = (t-1);
@@ -118,13 +124,18 @@ void handleNewMessages(int numNewMessages) {
       }
     }
     //----------- Fehlermeldung --------
-    if (text != "/data") {
+    if (text != "/data" || != "/help" || != "/close" || != "/open" || != "/status") {
       bot.sendChatAction(chat_id, "wut???");
       bot.sendMessage(chat_id, String("Sorry m8, dunno what the fuck you sayin. Send me /help for help"));
     }
 
    //------------ Open --------------------
    if (text == "/open") {
+    bot.sendChatAction(chat_id, "typing");
+    myStepper.step(-10240);
+   }
+   //------------ Close --------------------
+   if (text == "/close") {
     bot.sendChatAction(chat_id, "typing");
     myStepper.step(10240);
    }
